@@ -11,8 +11,9 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  bool _showPassword = true;
-  bool _showConfirmPassword = true;
+  bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,8 +25,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             spacing: 16,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 125),
-              Text(
+              const SizedBox(height: 125),
+              const Text(
                 'Complete sus datos para el registro',
                 style: TextStyle(
                   color: Color(0xff7C3EB9),
@@ -33,51 +34,57 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   fontSize: 14,
                 ),
               ),
-              PrimaryInput(
+              const PrimaryInput(
                 labelText: 'Email',
                 hintText: 'Ingresar email',
                 keyboardType: TextInputType.emailAddress,
               ),
-              PrimaryInput(
+              const PrimaryInput(
                 labelText: 'Teléfono',
-                hintText: 'Ingrese su numero de teléfono',
+                hintText: 'Ingrese su número de teléfono',
                 keyboardType: TextInputType.number,
               ),
               PrimaryInput(
                 labelText: 'Contraseña',
                 hintText: 'Ingresar contraseña',
                 keyboardType: TextInputType.visiblePassword,
-                obscureText: _showPassword,
-                suffixIcon: GestureDetector(
-                  onTap: () {
-                    _showPassword = !_showPassword;
-                    setState(() {});
+                obscureText: _obscurePassword,
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _obscurePassword = !_obscurePassword;
+                    });
                   },
-                  child: Icon(Icons.remove_red_eye),
                 ),
               ),
               PrimaryInput(
                 labelText: 'Confirmar Contraseña',
                 hintText: 'Ingresar nuevamente su contraseña',
                 keyboardType: TextInputType.visiblePassword,
-                obscureText: _showConfirmPassword,
+                obscureText: _obscureConfirmPassword,
                 suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscureConfirmPassword
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                  ),
                   onPressed: () {
-                    _showConfirmPassword = !_showConfirmPassword;
-                    setState(() {});
+                    setState(() {
+                      _obscureConfirmPassword = !_obscureConfirmPassword;
+                    });
                   },
-                  icon: Icon(Icons.remove_red_eye),
                 ),
               ),
               PrimaryButton(
                 label: 'Registrarse',
                 onPress: () {
-                  final route = MaterialPageRoute(
-                    builder: (context) {
-                      return HomeScreen();
-                    },
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomeScreen()),
                   );
-                  Navigator.push(context, route);
                 },
               ),
             ],

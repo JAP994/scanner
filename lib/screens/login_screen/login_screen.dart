@@ -14,8 +14,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool _showPassword = true;
-
+  bool _obscurePassword = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,13 +36,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 labelText: 'Contraseña',
                 hintText: 'Ingresar contraseña',
                 keyboardType: TextInputType.visiblePassword,
-                obscureText: _showPassword,
+                obscureText: _obscurePassword,
                 suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                  ),
                   onPressed: () {
-                    _showPassword = !_showPassword;
-                    setState(() {});
+                    setState(() {
+                      _obscurePassword = !_obscurePassword;
+                    });
                   },
-                  icon: Icon(Icons.remove_red_eye),
                 ),
               ),
               SizedBox(height: 32),
