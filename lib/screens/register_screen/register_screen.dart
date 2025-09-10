@@ -10,8 +10,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  bool _showPassword = false;
-  bool _showConfirmPassword = false;
+  bool _showPassword = true;
+  bool _showConfirmPassword = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
