@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scanner/screens/home_screen/widgets/list_tile_service.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -25,14 +26,46 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
             ),
           ),
-          ListTile(
-            leading: CircleAvatar(
-              backgroundImage: AssetImage('assets/icon1.jpeg'),
-              child: Text('A'),
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              physics: BouncingScrollPhysics(),
+              children: [
+                ListTileService(
+                  pathNackgroundImage: 'assets/icon1.jpeg',
+                  title: 'Servicio 1',
+                ),
+                ListTileService(
+                  pathNackgroundImage: 'assets/icon2.jpeg',
+                  title: 'Servicio 2',
+                ),
+                ListTileService(
+                  pathNackgroundImage: 'assets/icon3.jpeg',
+                  title: 'Servicio 3',
+                ),
+                ListTileService(
+                  pathNackgroundImage: 'assets/icon4.jpeg',
+                  title: 'Servicio 4',
+                ),
+                ListTileService(
+                  pathNackgroundImage: 'assets/icon5.jpeg',
+                  title: 'Servicio 5',
+                ),
+              ],
             ),
-            title: Text('Servicio 1'),
-            trailing: Icon(Icons.arrow_forward_ios_rounded),
-            onTap: () {},
+          ),
+          Expanded(
+            child: ListView.builder(
+              padding: EdgeInsets.zero,
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return ListTileService(
+                  pathNackgroundImage: 'assets/icon5.jpeg',
+                  title: 'Servicios $index',
+                  onTap: () {},
+                );
+              },
+            ),
           ),
         ],
       ),

@@ -8,41 +8,38 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
+            spacing: 16,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 125),
               IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back)),
-              SizedBox(height: 150),
               Text(
                 'Complete sus datos para el registro',
                 style: TextStyle(
                   color: Color(0xff7C3EB9),
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                   fontSize: 14,
                 ),
               ),
-              SizedBox(height: 16),
               PrimaryInput(labelText: 'Email', hintText: 'Ingresar email'),
-              SizedBox(height: 16),
               PrimaryInput(
                 labelText: 'Teléfono',
                 hintText: 'Ingrese su numero de teléfono',
               ),
-              SizedBox(height: 16),
               PrimaryInput(
                 labelText: 'Contraseña',
                 hintText: 'Ingresar contraseña',
               ),
-              SizedBox(height: 16),
               PrimaryInput(
                 labelText: 'Confirmar Contraseña',
                 hintText: 'Ingresar nuevamente su contraseña',
               ),
-              SizedBox(height: 32),
-              PrimaryButton(label: 'Iniciar Sesión', onPress: () {}),
+              PrimaryButton(label: 'Registrar Usuario', onPress: () {}),
             ],
           ),
         ),

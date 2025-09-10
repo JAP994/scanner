@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scanner/screens/home_screen/home_screen.dart';
+import 'package:scanner/screens/register_screen/register_screen.dart';
 
 void main() => runApp(const MyApp());
 
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'SCANNER APP',
-      home: HomeScreen(),
+      home: RegisterScreen(),
     );
   }
 }
