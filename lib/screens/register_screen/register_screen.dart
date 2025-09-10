@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scanner/screens/home_screen/home_screen.dart';
 import 'package:scanner/widgets/primary_button.dart';
 import 'package:scanner/widgets/primary_input.dart';
 
@@ -24,7 +25,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 125),
-              IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back)),
               Text(
                 'Complete sus datos para el registro',
                 style: TextStyle(
@@ -69,7 +69,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   icon: Icon(Icons.remove_red_eye),
                 ),
               ),
-              PrimaryButton(label: 'Registrar Usuario', onPress: () {}),
+              PrimaryButton(
+                label: 'Registrarse',
+                onPress: () {
+                  final route = MaterialPageRoute(
+                    builder: (context) {
+                      return HomeScreen();
+                    },
+                  );
+                  Navigator.push(context, route);
+                },
+              ),
             ],
           ),
         ),
