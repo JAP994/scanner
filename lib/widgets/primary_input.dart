@@ -8,6 +8,9 @@ class PrimaryInput extends StatelessWidget {
     this.keyboardType,
     this.obscureText = false,
     this.suffixIcon,
+    this.customValidator,
+    this.onSaved,
+    this.onChanged,
   });
 
   final String labelText;
@@ -15,10 +18,13 @@ class PrimaryInput extends StatelessWidget {
   final TextInputType? keyboardType;
   final bool obscureText;
   final Widget? suffixIcon;
+  final String? Function(String?)? customValidator;
+  final Function(String?)? onSaved;
+  final Function(String?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       decoration: InputDecoration(
         border: OutlineInputBorder(),
         labelText: labelText,
@@ -27,6 +33,17 @@ class PrimaryInput extends StatelessWidget {
       ),
       keyboardType: keyboardType,
       obscureText: obscureText,
+      validator: (value) {
+        if (value == null) {
+          return "Este parametro es requerido";
+        }
+        if (value.isEmpty) {
+          return "No puede estar vacio";
+        }
+        return customValidator?.call(value);
+      },
+      onSaved: onSaved,
+      onChanged: onChanged,
     );
   }
 }

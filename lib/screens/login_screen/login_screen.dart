@@ -7,6 +7,8 @@ import 'package:scanner/widgets/secondary_button.dart';
 import 'package:scanner/widgets/ternary_button.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const String routeName = "login";
+
   const LoginScreen({super.key});
 
   @override

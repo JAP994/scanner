@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:scanner/screens/home_screen/widgets/list_tile_service.dart';
 
 class HomeScreen extends StatelessWidget {
+  static const String routeName = "home";
+
   const HomeScreen({super.key});
 
   @override
