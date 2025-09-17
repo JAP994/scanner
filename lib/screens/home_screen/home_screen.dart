@@ -1,10 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:scanner/models/service_model.dart';
 import 'package:scanner/screens/home_screen/widgets/list_tile_service.dart';
+import 'package:scanner/services/services.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static const String routeName = "home";
 
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  List<ServiceModel>? _listServices;
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  Future<void> init() async {
+    _listServices = await Services().getAllServices();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,47 +47,21 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
             ),
           ),
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              physics: BouncingScrollPhysics(),
-              children: [
-                ListTileService(
-                  pathNackgroundImage: 'assets/icon1.jpeg',
-                  title: 'Servicio 1',
+          _listServices == null
+              ? CircularProgressIndicator()
+              : Expanded(
+                  child: ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: _listServices?.length,
+                    itemBuilder: (context, index) {
+                      return ListTileService(
+                        pathNackgroundImage: 'assets/icon5.jpeg',
+                        title: _listServices![index].name,
+                        onTap: () {},
+                      );
+                    },
+                  ),
                 ),
-                ListTileService(
-                  pathNackgroundImage: 'assets/icon2.jpeg',
-                  title: 'Servicio 2',
-                ),
-                ListTileService(
-                  pathNackgroundImage: 'assets/icon3.jpeg',
-                  title: 'Servicio 3',
-                ),
-                ListTileService(
-                  pathNackgroundImage: 'assets/icon4.jpeg',
-                  title: 'Servicio 4',
-                ),
-                ListTileService(
-                  pathNackgroundImage: 'assets/icon5.jpeg',
-                  title: 'Servicio 5',
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              padding: EdgeInsets.zero,
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return ListTileService(
-                  pathNackgroundImage: 'assets/icon5.jpeg',
-                  title: 'Servicios $index',
-                  onTap: () {},
-                );
-              },
-            ),
-          ),
         ],
       ),
     );
