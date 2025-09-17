@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class PrimaryInput extends StatelessWidget {
   const PrimaryInput({
     super.key,
-    required this.labelText,
-    required this.hintText,
+    required this.label,
+    required this.hint,
     this.keyboardType,
     this.obscureText = false,
     this.suffixIcon,
@@ -13,8 +13,8 @@ class PrimaryInput extends StatelessWidget {
     this.onChanged,
   });
 
-  final String labelText;
-  final String hintText;
+  final String label;
+  final String hint;
   final TextInputType? keyboardType;
   final bool obscureText;
   final Widget? suffixIcon;
@@ -24,24 +24,32 @@ class PrimaryInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Validación
+    // Guardado
     return TextFormField(
       decoration: InputDecoration(
         border: OutlineInputBorder(),
-        labelText: labelText,
-        hintText: hintText,
+        labelText: label,
+        hintText: hint,
         suffixIcon: suffixIcon,
       ),
       keyboardType: keyboardType,
       obscureText: obscureText,
       validator: (value) {
+        // Validar que exista
         if (value == null) {
           return "Este parametro es requerido";
         }
         if (value.isEmpty) {
-          return "No puede estar vacio";
+          return "No puede estar vacío";
         }
+
+        // final validator = customValidator?.call(value);
+        // return validator;
+
         return customValidator?.call(value);
       },
+
       onSaved: onSaved,
       onChanged: onChanged,
     );

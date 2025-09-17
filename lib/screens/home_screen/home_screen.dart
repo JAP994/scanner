@@ -1,26 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:scanner/models/service_model.dart';
+import 'package:scanner/screens/details_screen/details_screen.dart';
 import 'package:scanner/screens/home_screen/widgets/list_tile_service.dart';
 import 'package:scanner/services/services.dart';
 
 class HomeScreen extends StatefulWidget {
-  static const String routeName = "home";
-
   const HomeScreen({super.key});
+
+  static String routeName = "home";
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // variable que va a guardar los datos
   List<ServiceModel>? _listServices;
+
+  // init state
   @override
   void initState() {
     super.initState();
-    init();
+    _init();
   }
 
-  Future<void> init() async {
+  // funcion
+  Future<void> _init() async {
     _listServices = await Services().getAllServices();
     setState(() {});
   }
@@ -32,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.asset(
-            'assets/image_general.png',
+            "assets/image_general.png",
             height: MediaQuery.of(context).size.height * 0.35,
             width: double.infinity,
             fit: BoxFit.cover,
@@ -43,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
               vertical: 8.0,
             ),
             child: Text(
-              'SEVICIOS',
+              "Servicios",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
             ),
           ),
@@ -52,12 +57,19 @@ class _HomeScreenState extends State<HomeScreen> {
               : Expanded(
                   child: ListView.builder(
                     padding: EdgeInsets.zero,
-                    itemCount: _listServices?.length,
+                    itemCount: _listServices!.length,
                     itemBuilder: (context, index) {
                       return ListTileService(
-                        pathNackgroundImage: 'assets/icon5.jpeg',
+                        pathBackgroundImage: _listServices![index].urlSmall,
                         title: _listServices![index].name,
-                        onTap: () {},
+                        onTap: () {
+                          print("Servicios \$ $index");
+                          Navigator.pushNamed(
+                            context,
+                            DetailsScreen.routeName,
+                            arguments: _listServices![index],
+                          );
+                        },
                       );
                     },
                   ),

@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 class ListTileService extends StatelessWidget {
   const ListTileService({
     super.key,
-    required this.pathNackgroundImage,
+    required this.pathBackgroundImage,
     this.avatarLabel,
     required this.title,
     this.onTap,
   });
-  final String pathNackgroundImage;
+
+  // Parametros
+  final String pathBackgroundImage;
   final String? avatarLabel;
   final String title;
   final VoidCallback? onTap;
@@ -17,13 +19,13 @@ class ListTileService extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: CircleAvatar(
-        backgroundImage: AssetImage(pathNackgroundImage),
-        // child: Text(avatarLabel ?? ""),
-        child: avatarLabel == null ? null : Text(avatarLabel!),
+        backgroundImage: NetworkImage(pathBackgroundImage),
+        //child: Text(avatarLabel ?? ""), Opcion 1
+        child: avatarLabel == null ? null : Text(avatarLabel!) , // Operador ternario
       ),
       title: Text(title),
       trailing: Icon(Icons.arrow_forward_ios_rounded),
-      onTap: onTap ?? () {},
+      onTap: onTap,
     );
   }
 }
